@@ -9,12 +9,12 @@ dogsRouter.get("/", (req, res) => {
 
 //get create form 
 dogsRouter.get("/dogs/new", (req, res) => {
-    res.render("fruits/new");
+    res.render("dogs/new");
 });
 
 //get the edit form
 dogsRouter.get("/dogs/:id/edit", async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params.id;
     const dog = await Dog.findbyId(id);
 
     res.render("dogs/edit", { dog });
@@ -35,7 +35,7 @@ dogsRouter.get("/dogs", async (req, res) => {
 
 //create a dog
 dogsRouter.post("/dogs", async (req, res) => {
-    let { name, description, needsABrush } = req.body;
+    let { name, needsABrush } = req.body;
 
     if (needsABrush) {
         needsABrush = true;
@@ -43,7 +43,7 @@ dogsRouter.post("/dogs", async (req, res) => {
         needsABrush = false; 
     }
 
-    const dog = await Dog.create({ name, description, needsABrush });
+    const dog = await Dog.create({ name, needsABrush });
 
     res.redirect("/dogs");
 });
@@ -52,7 +52,6 @@ dogsRouter.put("/dogs/:id", async (req, res) => {
     const { id } = req.params; 
     const updateData = {
         name: req.body.name,
-        description: req.body.description,
         needsABrush: req.body.needsABrush,
     };
 

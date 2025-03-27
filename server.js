@@ -1,7 +1,9 @@
+import express from "express";
+import methodOverride from "method-override";
 import morgan from "morgan"
 import "./db/connection.js";
 
-import DogsRouter from ".controllers/dogs.js";
+import dogsRouter from "./controllers/dogs.js";
 
 const PORT = process.env.PORT || "3000"
 const app = express();
