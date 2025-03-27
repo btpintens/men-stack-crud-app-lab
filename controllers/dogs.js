@@ -14,8 +14,8 @@ dogsRouter.get("/dogs/new", (req, res) => {
 
 //get the edit form
 dogsRouter.get("/dogs/:id/edit", async (req, res) => {
-    const { id } = req.params.id;
-    const dog = await Dog.findbyId(id);
+    const { id } = req.params;
+    const dog = await Dog.findById(id);
 
     res.render("dogs/edit", { dog });
 });
